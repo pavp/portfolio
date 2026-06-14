@@ -1,0 +1,35 @@
+---
+import type { ExpertiseStrings } from '../i18n/types';
+import Section from './Section.astro';
+import SectionReveal from './SectionReveal.astro';
+
+interface Props {
+  expertise: ExpertiseStrings;
+}
+
+const { expertise } = Astro.props;
+---
+
+<Section id="expertise" heading={expertise.heading}>
+  <div
+    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;"
+  >
+    {expertise.items.map((item, i) => (
+      <SectionReveal index={i + 1}>
+        <div
+          class="card"
+          style="padding: 1.5rem; border-radius: 12px; height: 100%;"
+        >
+          <h3
+            style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); margin: 0 0 0.625rem; letter-spacing: -0.01em;"
+          >
+            {item.title}
+          </h3>
+          <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; margin: 0;">
+            {item.description}
+          </p>
+        </div>
+      </SectionReveal>
+    ))}
+  </div>
+</Section>

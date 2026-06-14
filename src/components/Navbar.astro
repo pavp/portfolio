@@ -1,0 +1,70 @@
+---
+import type { NavLinks } from '../i18n/types';
+
+interface Props {
+  nav: NavLinks;
+  locale: 'en' | 'es';
+  currentPath?: string;
+}
+
+const { nav, locale } = Astro.props;
+---
+
+<header
+  id="navbar"
+  role="banner"
+  class="navbar"
+  style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; border-bottom: 1px solid var(--card-border);"
+>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px;">
+    <!-- Logo / Name -->
+    <a
+      href={locale === 'en' ? '/' : '/es/'}
+      style="font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em;"
+      aria-label="Pedro Villarreal — home"
+    >
+      Pedro Villarreal
+    </a>
+
+    <!-- Nav links + toggles -->
+    <nav aria-label="Main navigation">
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 1.5rem;">
+        <li>
+          <a href="#about" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+            {nav.about}
+          </a>
+        </li>
+        <li>
+          <a href="#experience" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+            {nav.experience}
+          </a>
+        </li>
+        <li>
+          <a href="#skills" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+            {nav.skills}
+          </a>
+        </li>
+        <li>
+          <a href="#resume" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+            {nav.resume}
+          </a>
+        </li>
+        <li>
+          <a href="#contact" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+            {nav.contact}
+          </a>
+        </li>
+
+        <!-- Theme toggle slot -->
+        <li>
+          <slot name="theme-toggle" />
+        </li>
+
+        <!-- Lang toggle slot -->
+        <li>
+          <slot name="lang-toggle" />
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

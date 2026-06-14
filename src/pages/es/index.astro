@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import Impact from '../../components/Impact.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Achievements from '../../components/Achievements.astro';
+import Expertise from '../../components/Expertise.astro';
+import Skills from '../../components/Skills.astro';
+import Resume from '../../components/Resume.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../islands/ThemeToggle';
+import LangToggle from '../../islands/LangToggle';
+import { getTranslations } from '../../i18n/ui';
+import { topRoles, earlierRoles } from '../../data/experience';
+
+const locale = 'es';
+const t = getTranslations(locale);
+const currentPath = '/es/';
+---
+
+<Base
+  lang={locale}
+  canonical={currentPath}
+  skipToContentLabel={t.a11y.skipToContent}
+  title="Pedro Villarreal — Ingeniero Frontend Senior"
+  description="Ingeniero Frontend Senior especializado en React, React Native, Next.js y desarrollo asistido por IA. Basado en Madrid, disponible para remoto."
+>
+  <Navbar nav={t.nav} locale={locale} currentPath={currentPath}>
+    <ThemeToggle slot="theme-toggle" client:load />
+    <LangToggle slot="lang-toggle" client:load currentLocale={locale} currentPath={currentPath} />
+  </Navbar>
+
+  <main id="main-content" style="padding-top: 64px;">
+    <Hero hero={t.hero} />
+    <Impact impact={t.impact} />
+    <About about={t.about} />
+    <Experience experience={t.experience} topRoles={topRoles} earlierRoles={earlierRoles} />
+    <Achievements achievements={t.achievements} />
+    <Expertise expertise={t.expertise} />
+    <Skills skills={t.skills} />
+    <Resume resume={t.resume} />
+    <Contact contact={t.contact} />
+  </main>
+
+  <Footer footer={t.footer} />
+</Base>

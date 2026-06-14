@@ -1,0 +1,53 @@
+---
+import type { AboutStrings } from '../i18n/types';
+import Section from './Section.astro';
+import SectionReveal from './SectionReveal.astro';
+
+interface Props {
+  about: AboutStrings;
+}
+
+const { about } = Astro.props;
+---
+
+<Section id="about" heading={about.heading}>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+    <!-- About body -->
+    <SectionReveal index={1}>
+      <p style="color: var(--text-secondary); line-height: 1.75; font-size: 1.0625rem;">
+        {about.body}
+      </p>
+    </SectionReveal>
+
+    <!-- Education -->
+    <SectionReveal index={2}>
+      <div
+        class="card"
+        style="padding: 1.5rem;"
+      >
+        <h3
+          style="font-family: 'Manrope', system-ui, sans-serif; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin: 0 0 1rem;"
+        >
+          {about.education.label}
+        </h3>
+        <div style="color: var(--text); font-weight: 600; margin-bottom: 0.25rem;">
+          {about.education.degree}
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.9375rem; margin-bottom: 0.25rem;">
+          {about.education.institution}
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.875rem;">
+          {about.education.period}
+        </div>
+      </div>
+    </SectionReveal>
+  </div>
+</Section>
+
+<style>
+  @media (max-width: 640px) {
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

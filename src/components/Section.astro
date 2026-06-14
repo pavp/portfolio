@@ -1,0 +1,27 @@
+---
+interface Props {
+  id: string;
+  heading?: string;
+  class?: string;
+}
+
+const { id, heading, class: className = '' } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-label={heading}
+  class:list={['py-section', className]}
+  style="padding-top: 80px; padding-bottom: 80px;"
+>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+    {heading && (
+      <h2
+        style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1.875rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 2.5rem;"
+      >
+        {heading}
+      </h2>
+    )}
+    <slot />
+  </div>
+</section>

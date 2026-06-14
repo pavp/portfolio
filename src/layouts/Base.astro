@@ -1,0 +1,102 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/manrope/600.css';
+import '@fontsource/manrope/700.css';
+import '@fontsource/manrope/800.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: string;
+  canonical: string;
+  skipToContentLabel: string;
+}
+
+const {
+  title = 'Pedro Villarreal — Senior Frontend Engineer',
+  description = 'Senior Frontend Engineer specializing in React, React Native, Next.js and AI-assisted development. Based in Madrid, open to remote.',
+  lang,
+  canonical,
+  skipToContentLabel,
+} = Astro.props;
+
+const siteUrl = 'https://pedrovillarreal.dev';
+const ogImage = `${siteUrl}/og-image.png`;
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${siteUrl}${canonical}`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}${canonical}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      No-FOUC theme init: runs synchronously before paint.
+      Reads localStorage.theme first, then falls back to system preference.
+      Dark is the default if neither is set.
+    -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        // If user has explicitly chosen a theme, honour it.
+        // Otherwise fall back to system pref; dark is the site default.
+        var useDark = stored
+          ? stored === 'dark'
+          : !window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (useDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Skip to content: first focusable element -->
+    <a href="#main-content" class="skip-link">{skipToContentLabel}</a>
+
+    <slot />
+
+    <!-- Scroll reveal observer -->
+    <script>
+      import '../scripts/reveal';
+    </script>
+
+    <!-- Navbar scroll detection -->
+    <script is:inline>
+      (function () {
+        var navbar = document.getElementById('navbar');
+        if (!navbar) return;
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 10) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        }, { passive: true });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  index?: number;
+  class?: string;
+}
+
+const { index, class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={['reveal', className]}
+  data-index={index !== undefined ? String(index) : undefined}
+>
+  <slot />
+</div>
