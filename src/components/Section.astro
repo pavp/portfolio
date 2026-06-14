@@ -14,10 +14,10 @@ const { id, heading, class: className = '' } = Astro.props;
   class:list={['py-section', className]}
   style="padding-top: 80px; padding-bottom: 80px;"
 >
-  <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+  <div>
     {heading && (
       <h2
-        style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1.875rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 2.5rem;"
+        style="font-family: 'Manrope', system-ui, sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--text); margin-bottom: 2.5rem; display: inline-block; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem;"
       >
         {heading}
       </h2>

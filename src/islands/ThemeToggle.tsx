@@ -25,25 +25,27 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      className="nav-icon-btn"
       style={{
         background: 'none',
-        border: '1px solid var(--card-border)',
-        borderRadius: '4px',
+        border: 'none',
+        borderRadius: '9999px',
         cursor: 'pointer',
-        padding: '6px 8px',
-        color: 'var(--text)',
+        padding: '8px',
+        color: 'var(--text-variant)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         lineHeight: 1,
+        transition: 'color 0.2s',
       }}
     >
       {isDark ? (
-        /* Sun icon */
+        /* Sun icon (light_mode) — shown in dark mode to switch to light */
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="22"
+          height="22"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -63,11 +65,11 @@ export default function ThemeToggle() {
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
       ) : (
-        /* Moon icon */
+        /* Moon icon (dark_mode) — shown in light mode to switch to dark */
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="22"
+          height="22"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

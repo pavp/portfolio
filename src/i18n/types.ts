@@ -6,8 +6,8 @@ export interface ImpactMetric {
 export interface NavLinks {
   about: string;
   experience: string;
+  expertise: string;
   skills: string;
-  resume: string;
   contact: string;
 }
 
@@ -19,6 +19,9 @@ export interface HeroStrings {
   subtitle: string;
   specialization: string;
   badges: [string, string, string, string, string];
+  downloadResume: string;
+  contactMe: string;
+  viewExperience: string;
 }
 
 export interface ImpactStrings {
@@ -34,7 +37,7 @@ export interface EducationStrings {
 
 export interface AboutStrings {
   heading: string;
-  body: string;
+  body: string[];
   education: EducationStrings;
 }
 
@@ -111,24 +114,22 @@ export interface SkillsStrings {
   ];
 }
 
-export interface ResumeStrings {
-  heading: string;
-  downloadLabel: string;
-  lastUpdatedLabel: string;
-  lastUpdatedDate: string;
-  previewLabel: string;
-}
 
 export interface ContactStrings {
   heading: string;
+  availability: string;
+  ctaLabel: string;
   emailLabel: string;
   linkedinLabel: string;
+  githubLabel: string;
   opensInNewTab: string;
   copyEmailLabel: string;
   copiedLabel: string;
   email: string;
   linkedinUrl: string;
   linkedinHandle: string;
+  githubUrl: string;
+  githubHandle: string;
 }
 
 export interface A11yStrings {
@@ -150,7 +151,6 @@ export interface Translation {
   achievements: AchievementsStrings;
   expertise: ExpertiseStrings;
   skills: SkillsStrings;
-  resume: ResumeStrings;
   contact: ContactStrings;
   footer: FooterStrings;
 }

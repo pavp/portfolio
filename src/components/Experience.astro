@@ -1,7 +1,6 @@
 ---
 import type { ExperienceStrings } from '../i18n/types';
 import type { Role } from '../data/experience';
-import Section from './Section.astro';
 import SectionReveal from './SectionReveal.astro';
 
 interface Props {
@@ -17,117 +16,165 @@ const roleKeys = ['nextlane', 'capitole', 'makingSense', 'novacomp', 'urijiJami'
 const earlierRoleKeys = ['fancision', 'threehundredDev', 'teravision'] as const;
 ---
 
-<Section id="experience" heading={experience.heading}>
-  <!-- 2px vertical timeline -->
-  <div style="position: relative; padding-left: 2rem;">
-    <div class="timeline-line"></div>
-
-    <!-- Top 5 roles -->
-    {topRoles.map((role, i) => {
-      const key = roleKeys[i];
-      const roleData = experience.roles[key];
-      const isCurrent = role.current;
-
-      return (
-        <SectionReveal index={i + 1}>
-          <div
-            style={`position: relative; margin-bottom: 2.5rem; padding: 1.5rem; background: var(--surface); border: ${isCurrent ? '1px solid var(--accent)' : '1px solid var(--card-border)'}; border-radius: 8px;`}
+<section
+  id="experience"
+  aria-label={experience.heading}
+  style="padding-top: 80px; padding-bottom: 80px;"
+>
+  <div>
+    <div class="exp-grid">
+      <!-- Left: heading label -->
+      <div class="exp-label">
+        <SectionReveal index={1}>
+          <h2
+            style="font-family: 'Manrope', system-ui, sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--text); display: inline-block; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem;"
           >
-            <!-- Timeline dot -->
-            <div class:list={['timeline-dot', isCurrent ? 'current' : '']} style="top: 1.75rem;"></div>
-
-            <!-- Header row -->
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-              <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;">
-                  <span
-                    style={`font-family: 'Manrope', system-ui, sans-serif; font-size: 1.0625rem; font-weight: 700; color: ${isCurrent ? 'var(--accent)' : 'var(--text)'};`}
-                  >
-                    {role.company}
-                  </span>
-                  {isCurrent && (
-                    <span
-                      style="font-size: 0.6875rem; font-weight: 700; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 4px; padding: 2px 6px; letter-spacing: 0.06em; text-transform: uppercase;"
-                    >
-                      {experience.currentBadge}
-                    </span>
-                  )}
-                </div>
-                <div style="color: var(--text-secondary); font-size: 0.9375rem; font-weight: 500;">
-                  {roleData.title}
-                </div>
-              </div>
-              <div style="text-align: right;">
-                <div style="color: var(--text-secondary); font-size: 0.875rem;">{role.period}</div>
-                <div style="color: var(--text-secondary); font-size: 0.8125rem;">{role.location}</div>
-              </div>
-            </div>
-
-            <!-- Bullets -->
-            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.375rem;">
-              {roleData.bullets.map((bullet) => (
-                <li
-                  style="font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; padding-left: 1rem; position: relative;"
-                >
-                  <span
-                    style="position: absolute; left: 0; color: var(--accent);"
-                    aria-hidden="true"
-                  >›</span>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          </div>
+            {experience.heading}
+          </h2>
         </SectionReveal>
-      );
-    })}
+      </div>
 
-    <!-- Earlier roles accordion (zero JS — native <details>) -->
-    <SectionReveal index={6}>
-      <details style="margin-top: 0.5rem;">
-        <summary
-          style="cursor: pointer; font-family: 'Manrope', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; color: var(--text-secondary); padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; list-style: none; display: flex; align-items: center; justify-content: space-between;"
-        >
-          <span>{experience.earlierRolesLabel}</span>
-          <span aria-hidden="true" style="font-size: 1.25rem; line-height: 1;">›</span>
-        </summary>
+      <!-- Right: timeline content -->
+      <div class="exp-content">
+        <!-- 2px vertical timeline line + roles -->
+        <div style="position: relative; border-left: 2px solid var(--card-border); padding-left: 1.5rem; margin-left: 0.5rem; display: flex; flex-direction: column; gap: 3rem;">
 
-        <div style="padding-top: 1rem; display: flex; flex-direction: column; gap: 1.5rem;">
-          {earlierRoles.map((role, i) => {
-            const key = earlierRoleKeys[i];
-            const roleData = experience.earlierRoles[key];
+          {topRoles.map((role, i) => {
+            const key = roleKeys[i];
+            const roleData = experience.roles[key];
+            const isCurrent = role.current;
+
             return (
-              <div
-                style="padding: 1.25rem; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; position: relative;"
-              >
-                <div class="timeline-dot" style="top: 1.5rem;"></div>
-                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <div>
-                    <div style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.125rem;">
-                      {role.company}
+              <SectionReveal index={i + 2}>
+                <div style="position: relative; padding-top: 0.25rem;">
+                  <!-- Timeline dot -->
+                  <div
+                    style={`position: absolute; left: calc(-1.5rem - 5px); top: 0.5rem; width: 8px; height: 8px; border-radius: 50%; box-shadow: 0 0 0 4px var(--bg); background-color: ${isCurrent ? 'var(--accent)' : 'var(--text-secondary)'};`}
+                  ></div>
+
+                  <!-- Header row -->
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <div>
+                      <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;">
+                        <h3
+                          style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1.5rem; font-weight: 600; letter-spacing: normal; line-height: 1.4; color: var(--text); margin: 0;"
+                        >
+                          {role.company}
+                        </h3>
+                        {isCurrent && (
+                          <span
+                            style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--on-accent); background: var(--accent); border-radius: 9999px; padding: 2px 10px; letter-spacing: 0.05em; text-transform: uppercase;"
+                          >
+                            {experience.currentBadge}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div style="color: var(--text-secondary); font-size: 0.875rem;">
-                      {roleData.title}
+                    <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.2; letter-spacing: 0.01em; color: var(--text-secondary); text-align: right; flex-shrink: 0;">
+                      {role.period}
                     </div>
                   </div>
-                  <div style="text-align: right;">
-                    <div style="color: var(--text-secondary); font-size: 0.875rem;">{role.period}</div>
-                    <div style="color: var(--text-secondary); font-size: 0.8125rem;">{role.location}</div>
-                  </div>
+
+                  <!-- Role title -->
+                  <h4
+                    style={`font-family: 'Inter', system-ui, sans-serif; font-size: 1.125rem; font-weight: 700; line-height: 1.6; letter-spacing: normal; color: ${isCurrent ? 'var(--accent)' : 'var(--text-secondary)'}; margin: 0 0 0.75rem;`}
+                  >
+                    {roleData.title}
+                  </h4>
+
+                  <!-- Bullets -->
+                  <ul style="list-style: disc; margin: 0; padding: 0 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    {roleData.bullets.map((bullet) => (
+                      <li
+                        style="font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; color: var(--text-secondary); line-height: 1.6;"
+                      >
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.25rem;">
-                  {roleData.bullets.map((bullet) => (
-                    <li style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; padding-left: 1rem; position: relative;">
-                      <span style="position: absolute; left: 0; color: var(--accent);" aria-hidden="true">›</span>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </SectionReveal>
             );
           })}
+
+          <!-- Earlier roles accordion (zero JS — native <details>) -->
+          <SectionReveal index={7}>
+            <details>
+              <summary
+                style="cursor: pointer; font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; line-height: 1.2; color: var(--text-secondary); padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; list-style: none; display: flex; align-items: center; justify-content: space-between;"
+              >
+                <span>{experience.earlierRolesLabel}</span>
+                <span class="exp-chevron" aria-hidden="true" style="font-size: 1.25rem; line-height: 1; transition: transform 0.25s ease;">›</span>
+              </summary>
+
+              <div style="padding-top: 1.5rem; display: flex; flex-direction: column; gap: 2.5rem;">
+                {earlierRoles.map((role, i) => {
+                  const key = earlierRoleKeys[i];
+                  const roleData = experience.earlierRoles[key];
+                  return (
+                    <div style="position: relative; padding-top: 0.25rem;">
+                      <div
+                        style="position: absolute; left: calc(-1.5rem - 5px); top: 0.5rem; width: 8px; height: 8px; border-radius: 50%; box-shadow: 0 0 0 4px var(--bg); background-color: var(--text-secondary);"
+                      ></div>
+                      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem;">
+                        <h3 style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1.5rem; font-weight: 600; line-height: 1.4; letter-spacing: normal; color: var(--text); margin: 0;">
+                          {role.company}
+                        </h3>
+                        <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.2; letter-spacing: 0.01em; color: var(--text-secondary);">
+                          {role.period}
+                        </div>
+                      </div>
+                      <h4 style="font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; font-weight: 400; line-height: 1.6; letter-spacing: normal; color: var(--text-secondary); margin: 0 0 0.5rem;">
+                        {roleData.title}
+                      </h4>
+                      <ul style="list-style: disc; margin: 0; padding: 0 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.25rem;">
+                        {roleData.bullets.map((bullet) => (
+                          <li style="font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: normal; color: var(--text-secondary); line-height: 1.6;">
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </details>
+          </SectionReveal>
         </div>
-      </details>
-    </SectionReveal>
+      </div>
+    </div>
   </div>
-</Section>
+</section>
+
+<style>
+  .exp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Rotate chevron when accordion is open */
+  details[open] .exp-chevron {
+    transform: rotate(90deg);
+  }
+
+  /* Remove default disclosure triangle (Safari/Firefox) */
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exp-chevron {
+      transition: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 4fr 8fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+</style>

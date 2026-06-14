@@ -2,6 +2,7 @@
 import type { ContactStrings } from '../i18n/types';
 import Section from './Section.astro';
 import SectionReveal from './SectionReveal.astro';
+import Icon from './Icon.astro';
 
 interface Props {
   contact: ContactStrings;
@@ -12,68 +13,178 @@ const { contact } = Astro.props;
 
 <Section id="contact" heading={contact.heading}>
   <SectionReveal index={1}>
-    <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 480px;">
-      <!-- Email action -->
-      <a
-        href={`mailto:${contact.email}`}
-        style="display: flex; align-items: center; gap: 0.875rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s;"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); flex-shrink: 0;" aria-hidden="true">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
-        </svg>
-        <div>
-          <div style="font-weight: 600; color: var(--text); margin-bottom: 0.125rem;">
-            {contact.emailLabel}
-          </div>
-          <div style="font-size: 0.875rem; color: var(--text-secondary);">{contact.email}</div>
-        </div>
+    <div class="contact-wrap">
+      <!-- Availability statement (the seller) -->
+      <p class="contact-statement">{contact.availability}</p>
+
+      <!-- Primary CTA -->
+      <a href={`mailto:${contact.email}`} class="contact-cta">
+        {contact.ctaLabel}
+        <Icon name="mail" size={18} />
       </a>
 
-      <!-- LinkedIn action -->
-      <a
-        href={contact.linkedinUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        style="display: flex; align-items: center; gap: 0.875rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s;"
-        aria-label={`${contact.linkedinLabel} — ${contact.opensInNewTab}`}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--accent); flex-shrink: 0;" aria-hidden="true">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        <div>
-          <div style="font-weight: 600; color: var(--text); margin-bottom: 0.125rem;">
-            {contact.linkedinLabel}
-          </div>
-          <div style="font-size: 0.875rem; color: var(--text-secondary);">{contact.linkedinHandle}</div>
-        </div>
-      </a>
-
-      <!-- Copy email button (minimal JS, inline) -->
-      <div style="position: relative;">
+      <!-- Channels: Email (copy) · LinkedIn · GitHub -->
+      <div class="contact-channels">
+        <!-- Email with copy -->
         <button
           id="copy-email-btn"
+          type="button"
           data-email={contact.email}
           data-copied-label={contact.copiedLabel}
           data-copy-label={contact.copyEmailLabel}
-          style="display: flex; align-items: center; gap: 0.875rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; cursor: pointer; width: 100%; text-align: left; transition: border-color 0.2s;"
+          class="contact-card"
           aria-label={contact.copyEmailLabel}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent); flex-shrink: 0;" aria-hidden="true">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-          <div>
-            <div style="font-weight: 600; color: var(--text); margin-bottom: 0.125rem;" id="copy-email-label">
-              {contact.copyEmailLabel}
-            </div>
-            <div style="font-size: 0.875rem; color: var(--text-secondary);">{contact.email}</div>
-          </div>
+          <span class="contact-card-icon"><Icon name="mail" size={20} /></span>
+          <span class="contact-card-body">
+            <span class="contact-card-label" id="copy-email-label">{contact.emailLabel}</span>
+            <span class="contact-card-value">{contact.email}</span>
+          </span>
         </button>
+
+        <!-- LinkedIn -->
+        <a
+          href={contact.linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card"
+          aria-label={`${contact.linkedinLabel} — ${contact.opensInNewTab}`}
+        >
+          <span class="contact-card-icon"><Icon name="linkedin" size={20} /></span>
+          <span class="contact-card-body">
+            <span class="contact-card-label">{contact.linkedinLabel}</span>
+            <span class="contact-card-value">{contact.linkedinHandle}</span>
+          </span>
+        </a>
+
+        <!-- GitHub -->
+        <a
+          href={contact.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card"
+          aria-label={`${contact.githubLabel} — ${contact.opensInNewTab}`}
+        >
+          <span class="contact-card-icon"><Icon name="github" size={20} /></span>
+          <span class="contact-card-body">
+            <span class="contact-card-label">{contact.githubLabel}</span>
+            <span class="contact-card-value">{contact.githubHandle}</span>
+          </span>
+        </a>
       </div>
     </div>
   </SectionReveal>
 </Section>
+
+<style>
+  .contact-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .contact-statement {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .contact-cta:hover {
+    background: var(--accent-hover);
+  }
+
+  .contact-channels {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .contact-channels {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    font: inherit;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: var(--accent);
+  }
+
+  .contact-card-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+    display: inline-flex;
+  }
+
+  .contact-card-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .contact-card-label {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    margin-bottom: 0.125rem;
+  }
+
+  .contact-card-value {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
 
 <script>
   const btn = document.getElementById('copy-email-btn') as HTMLButtonElement | null;
@@ -81,27 +192,22 @@ const { contact } = Astro.props;
     const label = document.getElementById('copy-email-label');
     const email = btn.dataset.email ?? '';
     const copiedLabel = btn.dataset.copiedLabel ?? 'Copied!';
-    const copyLabel = btn.dataset.copyLabel ?? 'Copy email';
+    const copyLabel = btn.dataset.copyLabel ?? 'Email me';
     let timeout: ReturnType<typeof setTimeout>;
 
     btn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(email);
-        if (label) label.textContent = copiedLabel;
-        btn.setAttribute('aria-label', copiedLabel);
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          if (label) label.textContent = copyLabel;
-          btn.setAttribute('aria-label', copyLabel);
-        }, 1500);
       } catch {
-        // Clipboard API unavailable — show the email address for manual copy
-        if (label) label.textContent = copiedLabel;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          if (label) label.textContent = copyLabel;
-        }, 1500);
+        // Clipboard API unavailable — still flash the confirmation.
       }
+      if (label) label.textContent = copiedLabel;
+      btn.setAttribute('aria-label', copiedLabel);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (label) label.textContent = copyLabel;
+        btn.setAttribute('aria-label', copyLabel);
+      }, 1500);
     });
   }
 </script>

@@ -2,23 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS custom properties ──────────────────────────────────────────────── */
+/* ─── CSS custom properties (Stitch Material You palette) ─────────────────── */
+/* LIGHT theme — same hues as dark, clean Material You light counterpart */
 :root {
-  --bg: #FAFAFA;
-  --surface: #FFFFFF;
-  --text: #1F2937;
-  --text-secondary: #6B7280;
-  --accent: #2563EB;
-  --card-border: rgba(17, 24, 39, 0.08);
+  --bg: #faf8ff;
+  --surface: #ffffff;
+  --surface-2: #f3f3fa;
+  --surface-hover: #eceef4;
+  --text: #1a1c22;
+  --text-secondary: #44474f;
+  --text-variant: #44474f;
+  --accent: #005ac2;
+  --accent-hover: #004395;
+  --on-accent: #ffffff;
+  --outline: #74777f;
+  --outline-variant: #c4c6d0;
+  --card-border: rgba(116, 119, 127, 0.2);
 }
 
+/* DARK theme — exact Stitch tailwind-config tokens (default + primary experience) */
 .dark {
-  --bg: #0B1220;
-  --surface: #111827;
-  --text: #F9FAFB;
-  --text-secondary: #9CA3AF;
-  --accent: #3B82F6;
-  --card-border: rgba(255, 255, 255, 0.08);
+  --bg: #10131a;            /* background / surface-dim */
+  --surface: #1d2027;       /* surface-container */
+  --surface-2: #191b23;     /* surface-container-low */
+  --surface-hover: #272a31; /* surface-container-high */
+  --text: #e1e2ec;          /* on-background / on-surface */
+  --text-secondary: #c0c7d3;/* secondary */
+  --text-variant: #c2c6d6;  /* on-surface-variant */
+  --accent: #adc6ff;        /* primary (soft lavender-blue) */
+  --accent-hover: #d8e2ff;  /* primary-fixed */
+  --on-accent: #002e6a;     /* on-primary (text ON accent buttons) */
+  --outline: #8c909f;       /* outline */
+  --outline-variant: #424754;/* outline-variant */
+  --card-border: rgba(66, 71, 84, 0.3); /* outline-variant/30 */
 }
 
 /* ─── Base styles ────────────────────────────────────────────────────────── */
@@ -97,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 9999;
   padding: 0.5rem 1rem;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   border-radius: 4px;
   font-weight: 600;
   text-decoration: none;
@@ -108,23 +124,35 @@ h1, h2, h3, h4, h5, h6 {
   top: 1rem;
 }
 
-/* ─── Navbar backdrop blur on scroll (JS adds .scrolled) ────────────────── */
+/* ─── Navbar backdrop blur (always on, stronger on scroll) ──────────────── */
 .navbar {
-  background-color: transparent;
+  background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: background-color 0.3s, backdrop-filter 0.3s;
 }
 
 .navbar.scrolled {
-  background-color: color-mix(in srgb, var(--surface) 80%, transparent);
+  background-color: color-mix(in srgb, var(--surface) 85%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─── Nav icon buttons (lang + theme toggles) ────────────────────────────── */
+.nav-icon-btn:hover {
+  color: var(--accent) !important;
+}
+
+/* ─── Language dropdown menu items ───────────────────────────────────────── */
+.lang-menu-item:hover {
+  background: var(--surface-hover) !important;
 }
 
 /* ─── Card border utility ────────────────────────────────────────────────── */
 .card {
   background-color: var(--surface);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 /* ─── Timeline line ──────────────────────────────────────────────────────── */
@@ -149,6 +177,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .timeline-dot.current {
   background-color: var(--accent);
+}
+
+/* ─── Section scroll offset (accounts for fixed navbar height) ───────────── */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ─── Hero CTA hover states ──────────────────────────────────────────────── */
+a[href="/pedro-villarreal-cv.pdf"]:hover,
+a[download]:hover {
+  opacity: 0.88;
 }
 
 /* ─── Focus styles ───────────────────────────────────────────────────────── */

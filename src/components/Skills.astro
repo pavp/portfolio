@@ -1,6 +1,5 @@
 ---
 import type { SkillsStrings } from '../i18n/types';
-import Section from './Section.astro';
 import SectionReveal from './SectionReveal.astro';
 
 interface Props {
@@ -10,32 +9,70 @@ interface Props {
 const { skills } = Astro.props;
 ---
 
-<Section id="skills" heading={skills.heading}>
-  <div
-    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"
-  >
-    {skills.groups.map((group, i) => (
-      <SectionReveal index={i + 1}>
-        <div
-          class="card"
-          style="padding: 1.25rem 1.5rem;"
-        >
-          <h3
-            style="font-family: 'Manrope', system-ui, sans-serif; font-size: 0.875rem; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 0.875rem;"
+<section
+  id="skills"
+  aria-label={skills.heading}
+  style="padding-top: 80px; padding-bottom: 80px;"
+>
+  <div>
+    <div class="skills-layout">
+      <!-- Left: heading label -->
+      <div class="skills-label">
+        <SectionReveal index={1}>
+          <h2
+            style="font-family: 'Manrope', system-ui, sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--text); display: inline-block; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem;"
           >
-            {group.name}
-          </h3>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-            {group.skills.map((skill) => (
-              <span
-                style="font-size: 0.8125rem; color: var(--text-secondary); background: color-mix(in srgb, var(--text-secondary) 8%, transparent); border: 1px solid var(--card-border); border-radius: 4px; padding: 3px 10px; font-weight: 500;"
+            {skills.heading}
+          </h2>
+        </SectionReveal>
+      </div>
+
+      <!-- Right: skill groups -->
+      <div class="skills-groups">
+        {skills.groups.map((group, i) => (
+          <SectionReveal index={i + 2}>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
+              <h3
+                style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: var(--text); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.2; margin: 0;"
               >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-      </SectionReveal>
-    ))}
+                {group.name}
+              </h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                {group.skills.map((skill) => (
+                  <span
+                    style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; color: var(--text-secondary); border: 1px solid var(--card-border); border-radius: 4px; padding: 3px 12px; background: var(--surface);"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </SectionReveal>
+        ))}
+      </div>
+    </div>
   </div>
-</Section>
+</section>
+
+<style>
+  .skills-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .skills-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 4fr 8fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+</style>

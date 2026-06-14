@@ -8,8 +8,8 @@ export const en = {
   nav: {
     about: 'About',
     experience: 'Experience',
+    expertise: 'Expertise',
     skills: 'Skills',
-    resume: 'Resume',
     contact: 'Contact',
   },
 
@@ -30,6 +30,9 @@ export const en = {
       'App Store & Google Play',
       'React Native & Next.js Expert',
     ],
+    downloadResume: 'Download Resume',
+    contactMe: 'Contact Me',
+    viewExperience: 'View Experience',
   },
 
   impact: {
@@ -44,7 +47,12 @@ export const en = {
 
   about: {
     heading: 'About',
-    body: 'Senior Frontend Engineer with 8+ years of production experience building React Native and React applications across Europe and LATAM. My work spans the full breadth of frontend: architecture, design systems, testing, and CI/CD. I have built products from scratch, established company-wide engineering standards, and shipped to the App Store and Google Play. I use Claude Code, Codex, OpenCode, and Cursor as daily workflow tools — not as a shortcut, but as a force multiplier that keeps me focused on engineering quality and architectural decisions.',
+    body: [
+      "Over the last 8+ years I've delivered production-grade React Native and React applications across Europe and Latin America.",
+      'My experience spans frontend architecture, design systems, testing strategies, CI/CD automation and scalable engineering practices.',
+      "I've built applications from scratch, established engineering standards adopted company-wide and shipped products to both the App Store and Google Play.",
+      'I actively leverage modern AI coding agents such as Claude Code, Codex, OpenCode and Cursor as part of my daily engineering workflow, accelerating implementation, refactoring, testing, debugging and technical exploration while maintaining strong engineering standards and code quality.',
+    ],
     education: {
       label: 'Education',
       degree: 'B.Sc. Computer Engineering',
@@ -112,22 +120,23 @@ export const en = {
       fancision: {
         title: 'React Native Developer',
         bullets: [
-          'Developed features for a sports fan engagement mobile platform',
-          'Maintained CI/CD pipeline and release process',
+          'Delivered features for a high-engagement consumer app (trivia, mini-games, surveys) where smooth performance drove retention',
+          'Integrated OneSignal push notifications and Google/Facebook OAuth login to reduce sign-up friction',
+          'Applied Redux Persist for cross-session state so users resumed exactly where they left off',
         ],
       },
       threehundredDev: {
         title: 'React Native Developer',
         bullets: [
-          'Built React Native features in a fast-paced agency environment',
-          'Collaborated with cross-functional teams on mobile product delivery',
+          'Built a pharmacy e-commerce app from scratch, establishing the full project architecture and foundational decisions',
+          'Integrated Firebase for real-time data and auth; implemented React Hook Form checkout flows for conversion-critical reliability',
         ],
       },
       teravision: {
         title: 'Mobile Developer SSR',
         bullets: [
-          'Developed and maintained mobile applications for enterprise clients',
-          'Contributed to code reviews and quality standards',
+          'Contributed across native Android (Java) and a Spring Boot backend within the same product',
+          'Operated beyond the frontend layer when the product required it',
         ],
       },
     },
@@ -137,34 +146,28 @@ export const en = {
     heading: 'Selected Achievements',
     items: [
       {
-        title: 'Established Frontend Standards',
-        descriptor:
-          'Defined and rolled out company-wide frontend architecture standards adopted across all product teams at Nextlane.',
+        title: 'Established frontend standards',
+        descriptor: 'Company-wide adoption',
       },
       {
-        title: 'Built 5+ Products',
-        descriptor:
-          'Taken more than five products from zero to production across web and mobile platforms, each shipped end-to-end.',
+        title: 'Built 5+ products',
+        descriptor: 'From scratch to production',
       },
       {
-        title: 'Reusable Component Systems',
-        descriptor:
-          'Designed and built shared component libraries using MUI and custom primitives, reducing duplication across teams.',
+        title: 'Reusable component systems',
+        descriptor: 'Used across multiple products',
       },
       {
         title: 'Mobile App Publishing',
-        descriptor:
-          'Published apps to the App Store and Google Play, managing the full release pipeline from build to store submission.',
+        descriptor: 'App Store & Google Play',
       },
       {
         title: 'CI/CD Pipelines',
-        descriptor:
-          'Owned GitHub Actions pipelines that cut deploy times by up to 70% and gave teams a reliable automated delivery track.',
+        descriptor: 'Automated deployments',
       },
       {
         title: 'Technical Leadership',
-        descriptor:
-          'Conducted technical interviews, mentored engineers, and raised engineering quality through standards and code review culture.',
+        descriptor: 'Interviews and evaluations',
       },
     ],
   },
@@ -241,28 +244,26 @@ export const en = {
     ],
   },
 
-  resume: {
-    heading: 'Resume',
-    downloadLabel: 'Download Resume',
-    lastUpdatedLabel: 'Last updated',
-    lastUpdatedDate: 'June 14, 2026',
-    previewLabel: 'Pedro Villarreal — Senior Frontend Engineer',
-  },
-
   contact: {
     heading: 'Contact',
+    availability:
+      'Open to opportunities where I can help teams build scalable products, establish engineering standards and deliver high-quality user experiences.',
+    ctaLabel: "Let's Talk",
     emailLabel: 'Email me',
     linkedinLabel: 'LinkedIn',
+    githubLabel: 'GitHub',
     opensInNewTab: 'opens in new tab',
     copyEmailLabel: 'Copy email',
     copiedLabel: 'Copied!',
     email: 'pedrovillarreal@gmail.com',
     linkedinUrl: 'https://linkedin.com/in/villapp',
     linkedinHandle: 'linkedin.com/in/villapp',
+    githubUrl: 'https://github.com/pavp',
+    githubHandle: 'github.com/pavp',
   },
 
   footer: {
-    tagline: 'Senior Frontend Engineer · Madrid',
-    copyright: 'Pedro Villarreal',
+    tagline: 'Senior Frontend Engineer',
+    copyright: 'Pedro Villarreal. Built with precision and attention to detail.',
   },
 } satisfies Translation;

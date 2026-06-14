@@ -8,8 +8,8 @@ export const es = {
   nav: {
     about: 'Sobre mí',
     experience: 'Experiencia',
+    expertise: 'Especialidad',
     skills: 'Habilidades',
-    resume: 'Currículum',
     contact: 'Contacto',
   },
 
@@ -30,6 +30,9 @@ export const es = {
       'App Store y Google Play',
       'Experto en React Native y Next.js',
     ],
+    downloadResume: 'Descargar CV',
+    contactMe: 'Contáctame',
+    viewExperience: 'Ver Experiencia',
   },
 
   impact: {
@@ -44,7 +47,12 @@ export const es = {
 
   about: {
     heading: 'Sobre mí',
-    body: 'Ingeniero Frontend Senior con más de 8 años de experiencia en producción construyendo aplicaciones React Native y React en Europa y LATAM. Mi trabajo abarca arquitectura, sistemas de diseño, testing y CI/CD. He construido productos desde cero, establecido estándares de ingeniería a nivel de empresa y publicado en App Store y Google Play. Utilizo Claude Code, Codex, OpenCode y Cursor como herramientas de trabajo diario — no como atajos, sino como multiplicadores de fuerza que me permiten mantener el foco en la calidad de ingeniería y las decisiones arquitectónicas.',
+    body: [
+      'Durante los últimos 8+ años he desarrollado aplicaciones React Native y React de nivel producción en Europa y América Latina.',
+      'Mi experiencia abarca arquitectura frontend, sistemas de diseño, estrategias de testing, automatización de CI/CD y prácticas de ingeniería escalables.',
+      'He construido aplicaciones desde cero, establecido estándares de ingeniería adoptados a nivel de empresa y publicado productos tanto en la App Store como en Google Play.',
+      'Utilizo activamente agentes de codificación con IA como Claude Code, Codex, OpenCode y Cursor como parte de mi flujo de trabajo diario, acelerando la implementación, refactorización, testing, depuración y exploración técnica, manteniendo siempre altos estándares de ingeniería y calidad de código.',
+    ],
     education: {
       label: 'Educación',
       degree: 'Ingeniería en Informática',
@@ -112,22 +120,23 @@ export const es = {
       fancision: {
         title: 'Desarrollador React Native',
         bullets: [
-          'Desarrollé funcionalidades para una plataforma móvil de engagement deportivo',
-          'Mantuve el pipeline de CI/CD y el proceso de releases',
+          'Desarrollé funcionalidades para una app de alto engagement (trivia, minijuegos, encuestas) donde el rendimiento impactaba directamente en la retención',
+          'Integré notificaciones push de OneSignal y login OAuth con Google/Facebook para reducir la fricción de registro',
+          'Apliqué Redux Persist para el estado entre sesiones, permitiendo a los usuarios retomar justo donde lo dejaron',
         ],
       },
       threehundredDev: {
         title: 'Desarrollador React Native',
         bullets: [
-          'Construí funcionalidades React Native en un entorno de agencia de ritmo acelerado',
-          'Colaboré con equipos multifuncionales en la entrega de productos móviles',
+          'Construí una app de e-commerce de farmacia desde cero, estableciendo la arquitectura completa del proyecto y las decisiones fundamentales',
+          'Integré Firebase para datos en tiempo real y autenticación; implementé flujos de checkout con React Hook Form priorizando la fiabilidad crítica para la conversión',
         ],
       },
       teravision: {
         title: 'Desarrollador Móvil SSR',
         bullets: [
-          'Desarrollé y mantuve aplicaciones móviles para clientes empresariales',
-          'Participé en revisiones de código y estándares de calidad',
+          'Contribuí tanto en Android nativo (Java) como en un backend Spring Boot dentro del mismo producto',
+          'Operé más allá de la capa frontend cuando el producto lo requería',
         ],
       },
     },
@@ -137,34 +146,28 @@ export const es = {
     heading: 'Logros Destacados',
     items: [
       {
-        title: 'Estándares Frontend Establecidos',
-        descriptor:
-          'Definí e implementé estándares de arquitectura frontend a nivel de empresa adoptados por todos los equipos de producto en Nextlane.',
+        title: 'Estándares frontend establecidos',
+        descriptor: 'Adopción a nivel de empresa',
       },
       {
-        title: '5+ Productos Construidos',
-        descriptor:
-          'Llevé más de cinco productos de cero a producción en plataformas web y móvil, cada uno desarrollado de extremo a extremo.',
+        title: '5+ productos construidos',
+        descriptor: 'De cero a producción',
       },
       {
-        title: 'Sistemas de Componentes Reutilizables',
-        descriptor:
-          'Diseñé y construí librerías de componentes compartidas con MUI y primitivas personalizadas, reduciendo la duplicación entre equipos.',
+        title: 'Sistemas de componentes reutilizables',
+        descriptor: 'Usados en múltiples productos',
       },
       {
-        title: 'Publicación en Tiendas Móviles',
-        descriptor:
-          'Publiqué aplicaciones en App Store y Google Play, gestionando el pipeline completo desde el build hasta el envío a las tiendas.',
+        title: 'Publicación de apps móviles',
+        descriptor: 'App Store y Google Play',
       },
       {
         title: 'Pipelines de CI/CD',
-        descriptor:
-          'Gestioné pipelines con GitHub Actions que redujeron los tiempos de despliegue hasta un 70% y proporcionaron una entrega automatizada confiable.',
+        descriptor: 'Despliegues automatizados',
       },
       {
-        title: 'Liderazgo Técnico',
-        descriptor:
-          'Conduje entrevistas técnicas, mentoreé ingenieros y elevé la calidad de ingeniería a través de estándares y cultura de revisión de código.',
+        title: 'Liderazgo técnico',
+        descriptor: 'Entrevistas y evaluaciones',
       },
     ],
   },
@@ -241,28 +244,26 @@ export const es = {
     ],
   },
 
-  resume: {
-    heading: 'Currículum',
-    downloadLabel: 'Descargar Currículum',
-    lastUpdatedLabel: 'Última actualización',
-    lastUpdatedDate: '14 de junio de 2026',
-    previewLabel: 'Pedro Villarreal — Ingeniero Frontend Senior',
-  },
-
   contact: {
     heading: 'Contacto',
+    availability:
+      'Abierto a oportunidades donde pueda ayudar a equipos a construir productos escalables, establecer estándares de ingeniería y entregar experiencias de usuario de alta calidad.',
+    ctaLabel: 'Hablemos',
     emailLabel: 'Enviarme un email',
     linkedinLabel: 'LinkedIn',
+    githubLabel: 'GitHub',
     opensInNewTab: 'se abre en una pestaña nueva',
     copyEmailLabel: 'Copiar email',
     copiedLabel: '¡Copiado!',
     email: 'pedrovillarreal@gmail.com',
     linkedinUrl: 'https://linkedin.com/in/villapp',
     linkedinHandle: 'linkedin.com/in/villapp',
+    githubUrl: 'https://github.com/pavp',
+    githubHandle: 'github.com/pavp',
   },
 
   footer: {
-    tagline: 'Ingeniero Frontend Senior · Madrid',
-    copyright: 'Pedro Villarreal',
+    tagline: 'Ingeniero Frontend Senior',
+    copyright: 'Pedro Villarreal. Hecho con precisión y atención al detalle.',
   },
 } satisfies Translation;

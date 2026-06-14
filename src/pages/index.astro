@@ -8,7 +8,6 @@ import Experience from '../components/Experience.astro';
 import Achievements from '../components/Achievements.astro';
 import Expertise from '../components/Expertise.astro';
 import Skills from '../components/Skills.astro';
-import Resume from '../components/Resume.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggle from '../islands/ThemeToggle';
@@ -28,12 +27,23 @@ const currentPath = '/';
   title="Pedro Villarreal — Senior Frontend Engineer"
   description="Senior Frontend Engineer specializing in React, React Native, Next.js and AI-assisted development. Based in Madrid, open to remote."
 >
-  <Navbar nav={t.nav} locale={locale} currentPath={currentPath}>
+  <Navbar
+    nav={t.nav}
+    locale={locale}
+    currentPath={currentPath}
+    githubUrl={t.contact.githubUrl}
+    linkedinUrl={t.contact.linkedinUrl}
+    githubLabel={t.contact.githubLabel}
+    linkedinLabel={t.contact.linkedinLabel}
+  >
     <ThemeToggle slot="theme-toggle" client:load />
     <LangToggle slot="lang-toggle" client:load currentLocale={locale} currentPath={currentPath} />
   </Navbar>
 
-  <main id="main-content" style="padding-top: 64px;">
+  <main
+    id="main-content"
+    style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; padding-top: 64px;"
+  >
     <Hero hero={t.hero} />
     <Impact impact={t.impact} />
     <About about={t.about} />
@@ -41,7 +51,6 @@ const currentPath = '/';
     <Achievements achievements={t.achievements} />
     <Expertise expertise={t.expertise} />
     <Skills skills={t.skills} />
-    <Resume resume={t.resume} />
     <Contact contact={t.contact} />
   </main>
 

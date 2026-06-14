@@ -1,13 +1,18 @@
 ---
 import type { NavLinks } from '../i18n/types';
+import Icon from './Icon.astro';
 
 interface Props {
   nav: NavLinks;
   locale: 'en' | 'es';
   currentPath?: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  githubLabel: string;
+  linkedinLabel: string;
 }
 
-const { nav, locale } = Astro.props;
+const { nav, locale, githubUrl, linkedinUrl, githubLabel, linkedinLabel } = Astro.props;
 ---
 
 <header
@@ -20,51 +25,157 @@ const { nav, locale } = Astro.props;
     <!-- Logo / Name -->
     <a
       href={locale === 'en' ? '/' : '/es/'}
-      style="font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em;"
+      style="font-family: 'Manrope', system-ui, sans-serif; font-weight: 600; font-size: 1.5rem; color: var(--text); text-decoration: none; letter-spacing: normal; line-height: 1.4;"
       aria-label="Pedro Villarreal — home"
     >
       Pedro Villarreal
     </a>
 
     <!-- Nav links + toggles -->
-    <nav aria-label="Main navigation">
-      <ul style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 1.5rem;">
+    <nav aria-label="Main navigation" class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
+      <ul class="nav-links" style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 1.5rem;">
         <li>
-          <a href="#about" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+          <a href="#about" class="nav-link" style="color: var(--text-variant); text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s;">
             {nav.about}
           </a>
         </li>
         <li>
-          <a href="#experience" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+          <a href="#experience" class="nav-link" style="color: var(--text-variant); text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s;">
             {nav.experience}
           </a>
         </li>
         <li>
-          <a href="#skills" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+          <a href="#expertise" class="nav-link" style="color: var(--text-variant); text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s;">
+            {nav.expertise}
+          </a>
+        </li>
+        <li>
+          <a href="#skills" class="nav-link" style="color: var(--text-variant); text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s;">
             {nav.skills}
           </a>
         </li>
         <li>
-          <a href="#resume" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
-            {nav.resume}
-          </a>
-        </li>
-        <li>
-          <a href="#contact" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;">
+          <a href="#contact" class="nav-link" style="color: var(--text-variant); text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; transition: color 0.2s;">
             {nav.contact}
           </a>
         </li>
-
-        <!-- Theme toggle slot -->
-        <li>
-          <slot name="theme-toggle" />
-        </li>
-
-        <!-- Lang toggle slot -->
-        <li>
-          <slot name="lang-toggle" />
-        </li>
       </ul>
+
+      <!-- Utilities zone: divider, then social icons + toggles as one group -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; padding-left: 1rem; border-left: 1px solid var(--card-border);">
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-icon-btn nav-social"
+          aria-label={githubLabel}
+        >
+          <Icon name="github" size={20} />
+        </a>
+        <a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-icon-btn nav-social"
+          aria-label={linkedinLabel}
+        >
+          <Icon name="linkedin" size={20} />
+        </a>
+        <slot name="lang-toggle" />
+        <slot name="theme-toggle" />
+      </div>
     </nav>
   </div>
 </header>
+
+<style>
+  .nav-link {
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+  }
+
+  .nav-link.active {
+    color: var(--accent) !important;
+  }
+
+  /* Active underline indicator */
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .nav-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 8px;
+    color: var(--text-variant);
+    text-decoration: none;
+  }
+
+
+  @media (max-width: 767px) {
+    .nav-links {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Highlight the nav link of the section currently in view.
+  const navLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.nav-link')
+  );
+
+  // Map section id -> nav link.
+  const linkBySection = new Map<string, HTMLAnchorElement>();
+  for (const link of navLinks) {
+    const id = link.getAttribute('href')?.replace('#', '');
+    if (id) linkBySection.set(id, link);
+  }
+
+  const sections = Array.from(linkBySection.keys())
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sections.length > 0) {
+    let activeId = '';
+
+    function setActive(id: string) {
+      if (id === activeId) return;
+      activeId = id;
+      navLinks.forEach((l) => l.classList.remove('active'));
+      linkBySection.get(id)?.classList.add('active');
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Pick the most visible intersecting section.
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]?.target.id) {
+          setActive(visible[0].target.id);
+        }
+      },
+      {
+        // Offset for the 64px fixed navbar; trigger around the upper third.
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: [0, 0.25, 0.5, 1],
+      }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>

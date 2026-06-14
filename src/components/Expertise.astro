@@ -1,35 +1,87 @@
 ---
 import type { ExpertiseStrings } from '../i18n/types';
-import Section from './Section.astro';
 import SectionReveal from './SectionReveal.astro';
+import Icon from './Icon.astro';
 
 interface Props {
   expertise: ExpertiseStrings;
 }
 
 const { expertise } = Astro.props;
+
+// Icon glyphs matching Stitch's Material Symbols, in card order:
+// Frontend Architecture, Mobile Engineering, Engineering Quality,
+// Continuous Delivery, AI-Assisted Engineering.
+const expertiseIcons = [
+  'architecture',
+  'smartphone',
+  'verified',
+  'rocket_launch',
+  'smart_toy',
+] as const;
 ---
 
-<Section id="expertise" heading={expertise.heading}>
-  <div
-    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;"
-  >
-    {expertise.items.map((item, i) => (
-      <SectionReveal index={i + 1}>
-        <div
-          class="card"
-          style="padding: 1.5rem; border-radius: 12px; height: 100%;"
-        >
-          <h3
-            style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); margin: 0 0 0.625rem; letter-spacing: -0.01em;"
+<section
+  id="expertise"
+  aria-label={expertise.heading}
+  style="padding-top: 80px; padding-bottom: 80px;"
+>
+  <div>
+    <!-- Full-width heading -->
+    <SectionReveal index={1}>
+      <h2
+        style="font-family: 'Manrope', system-ui, sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--text); display: inline-block; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; margin-bottom: 2.5rem;"
+      >
+        {expertise.heading}
+      </h2>
+    </SectionReveal>
+
+    <!-- 2-col card grid -->
+    <div class="expertise-grid">
+      {expertise.items.map((item, i) => (
+        <SectionReveal index={i + 2}>
+          <div
+            class="card expertise-card"
           >
-            {item.title}
-          </h3>
-          <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; margin: 0;">
-            {item.description}
-          </p>
-        </div>
-      </SectionReveal>
-    ))}
+            <span style="display: inline-flex; color: var(--accent); margin-bottom: 1rem;">
+              <Icon name={expertiseIcons[i]} size={32} />
+            </span>
+            <h3
+              style="font-family: 'Manrope', system-ui, sans-serif; font-size: 1.5rem; font-weight: 600; line-height: 1.4; letter-spacing: normal; color: var(--text); margin: 0 0 0.5rem;"
+            >
+              {item.title}
+            </h3>
+            <p style="font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: normal; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+              {item.description}
+            </p>
+          </div>
+        </SectionReveal>
+      ))}
+    </div>
   </div>
-</Section>
+</section>
+
+<style>
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .expertise-card {
+    padding: 3rem;
+    border-radius: 8px;
+    border-color: var(--card-border);
+    transition: background-color 0.2s;
+  }
+
+  .expertise-card:hover {
+    background-color: var(--surface-hover);
+  }
+
+  @media (min-width: 640px) {
+    .expertise-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
